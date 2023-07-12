@@ -12,3 +12,5 @@ plt.xlabel("Method")
 plt.tight_layout()
 plt.savefig("./figures/rmse_barchart.png")
 plt.show()
+
+print(df.groupby(['method']).mean())

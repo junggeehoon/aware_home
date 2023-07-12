@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 from pykalman import KalmanFilter
 
-df = pd.read_csv('./data/datapoints.csv')
+df = pd.read_csv('./data/sample.csv')
 
 filtered_df = pd.DataFrame()
 

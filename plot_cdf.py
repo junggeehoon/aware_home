@@ -6,6 +6,8 @@ import numpy as np
 sns.set_style("whitegrid")
 df = pd.read_csv("./result/rsme.csv")
 
+print(df.groupby(['method']).mean())
+
 sns.kdeplot(data=df, x='rsme', hue="method", cumulative=True, common_norm=False)
 
 plt.ylabel("CDF")

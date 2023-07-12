@@ -1,3 +1,4 @@
+import numpy as np
 import serial
 import pickle
 import time
@@ -71,6 +72,12 @@ def check_numbers(arr):
     return True
 
 
+def convert(arr):
+    array = np.array(arr)
+    array[array < -100] = -100
+    return array
+
+
 start_time = time.time()
 while True:
     string = ser.readline().decode()
@@ -78,6 +85,7 @@ while True:
     if check_numbers(s):
         arr = parse_int(s)
         if validate(arr):
+            arr = convert(arr)
             predict = rf.predict([arr])
             print("Label: {}, Coordinate: {}".format(predict, labels[predict[0]]))
         else:

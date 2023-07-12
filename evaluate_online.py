@@ -4,8 +4,8 @@ import pickle
 import serial
 import time
 
-ACTUAL_LABEL = 'K-13'
-NUMBER_OF_DATA = 400
+ACTUAL_LABEL = 'K-06'
+NUMBER_OF_DATA = 300
 
 random_forest_predict = []
 knn_predict = []
@@ -51,9 +51,7 @@ labels = {
 }
 PORT = '/dev/cu.usbserial-020F8794'
 
-df = pd.read_csv('./train/second.csv')
-df = df.dropna()
-
+df = pd.read_csv('./train/datapoints.csv')
 
 mean = df.groupby(['x', 'y']).mean()
 
@@ -86,6 +84,11 @@ def check_numbers(arr):
             return False
     return True
 
+def convert(arr):
+    array = np.array(arr)
+    array[array < -100] = -100
+    return array
+
 count = 0
 start_time = time.time()
 data = []
@@ -95,6 +98,7 @@ while len(data) < NUMBER_OF_DATA * 4:
     if check_numbers(s):
         arr = parse_int(s)
         if validate(arr):
+            arr = convert(arr)
             count += 1
             predict = (np.square(mean - arr).mean(axis=1)).idxmin()
 
