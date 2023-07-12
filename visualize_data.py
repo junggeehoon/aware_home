@@ -3,9 +3,9 @@ import pandas as pd
 import numpy as np
 colors = plt.rcParams["axes.prop_cycle"]()
 
-LABEL = 'K-01'
+LABEL = 'L-02'
 
-df = pd.read_csv('./data/datapoints.csv')
+df = pd.read_csv('./data/sample.csv')
 df = df.dropna()
 
 data = df.loc[df['label'] == LABEL]
@@ -18,11 +18,11 @@ for i in range(number_of_sensor):
     x = data.iloc[:, i].values
     print("mu, std for channel {}: {:.2f}, {:.2f}".format(i, np.mean(x), np.std(x)))
     plt.subplot(number_of_sensor, 1, i + 1)
-    plt.plot(x, label='Raw ' + str(i), color=c1)
+    plt.plot(x, label='Channel ' + str(i), color=c1)
     plt.ylim([-100, -40])
     plt.ylabel('RSSI (dBm)')
     plt.legend(loc="upper right")
 
 fig.tight_layout()
-# plt.savefig("./figures/10 points average.png")
+plt.savefig("./figures/rssi.png")
 plt.show()

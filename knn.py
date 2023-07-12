@@ -5,15 +5,15 @@ from sklearn.model_selection import GridSearchCV
 import pandas as pd
 import pickle
 
-df = pd.read_csv('./data/datapoints.csv')
+df = pd.read_csv('./train/datapoints.csv')
 df = df.dropna()
 
 X = df.iloc[:, 0: -3].values
 y = df['label'].values
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, shuffle=True)
 
-knn = KNeighborsClassifier(n_neighbors=3)
-knn.fit(X_train, y_train)
+knn = KNeighborsClassifier(n_neighbors=5)
+knn.fit(X, y)
 
 
 # param_grid = {
@@ -31,8 +31,8 @@ knn.fit(X_train, y_train)
 # knn.fit(X_train, y_train)
 # # print(knn.score(X_test, y_test))
 
-accuracies = cross_val_score(estimator=knn, X=X_test, y=y_test)
-print("Average score: {}".format(accuracies.mean()))
+# accuracies = cross_val_score(estimator=knn, X=X_test, y=y_test)
+# print("Average score: {}".format(accuracies.mean()))
 
 
 filename = "./models/knn.pickle"

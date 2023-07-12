@@ -7,14 +7,13 @@ import pandas as pd
 import numpy as np
 import pickle
 
-df = pd.read_csv('./data/kalman.csv')
-df = df.dropna()
+df = pd.read_csv('./train/datapoints.csv')
 
 X = df.iloc[:, 0: -3].values
 y = df['label'].values
 # X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, shuffle=True)
 
-rf = RandomForestClassifier(random_state=0, n_estimators=500, criterion='entropy')
+rf = RandomForestClassifier(max_depth=15, random_state=0, n_estimators=500, criterion='entropy')
 rf.fit(X, y)
 
 # # Make predictions for the test set

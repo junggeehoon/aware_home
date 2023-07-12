@@ -4,13 +4,13 @@ import pandas as pd
 import numpy as np
 
 sns.set_style("whitegrid")
-df = pd.read_csv("./result/rmse.csv")
+df = pd.read_csv("./result/rsme.csv")
 
-# sns.ecdfplot(data=df, x='rsme', hue="method")
 sns.kdeplot(data=df, x='rsme', hue="method", cumulative=True, common_norm=False)
 
 plt.ylabel("CDF")
 plt.xlabel("Error (m)")
+plt.xlim([0, 5])
 plt.tight_layout()
 plt.savefig("./figures/rmse_cdf.png")
 plt.show()

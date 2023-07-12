@@ -3,8 +3,8 @@ import pandas as pd
 import numpy as np
 import time
 
-LABEL = "H-10"
-NUMBER_OF_DATA = 1000
+LABEL = "L-02"
+NUMBER_OF_DATA = 500
 PORT = '/dev/cu.usbserial-020F8794'
 
 labels = {
@@ -104,4 +104,4 @@ columns.append("label")
 df = pd.DataFrame(np.concatenate((x, y, label.reshape(-1, 1)), axis=1), columns=columns)
 print("Done! for label: {} Took {:.1f}s to complete".format(LABEL, time.time() - start_time))
 print("Saving data...")
-df.to_csv('./test/datapoints.csv', mode='a', index=False, header=False)
+df.to_csv('./vectors/fifth.csv', mode='a', index=False, header=False)

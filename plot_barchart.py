@@ -3,7 +3,7 @@ import seaborn as sns
 import pandas as pd
 
 sns.set_style("whitegrid")
-df = pd.read_csv("./result/rmse.csv")
+df = pd.read_csv("./result/rsme.csv")
 
 sns.barplot(data=df, x="method", y="rsme")
 

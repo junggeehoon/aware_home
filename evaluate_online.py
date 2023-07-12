@@ -4,7 +4,7 @@ import pickle
 import serial
 import time
 
-ACTUAL_LABEL = 'K-12'
+ACTUAL_LABEL = 'K-13'
 NUMBER_OF_DATA = 400
 
 random_forest_predict = []
@@ -51,11 +51,9 @@ labels = {
 }
 PORT = '/dev/cu.usbserial-020F8794'
 
-df = pd.read_csv('./data/datapoints.csv')
+df = pd.read_csv('./train/second.csv')
 df = df.dropna()
 
-X = df.iloc[:, 0: -3].values
-y = df['label'].values
 
 mean = df.groupby(['x', 'y']).mean()
 
@@ -124,24 +122,6 @@ print("Done! Took {:.1f}s to complete".format(time.time() - start_time))
 
 df = pd.DataFrame(data, columns=['rsme', 'method', 'label'])
 
-mean = df.groupby(['method']).mean()
-print(mean)
+print(df.groupby(['method']).mean())
 
-df.to_csv("./result/rmse.csv", mode='a', index=False, header=False)
-
-# data = {
-#     "traditional": np.sqrt(np.square(np.subtract(traditional_predict, labels[ACTUAL_LABEL])).sum(axis=1)),
-#     "knn": np.sqrt(np.square(np.subtract(knn_predict, labels[ACTUAL_LABEL])).sum(axis=1)),
-#     "svm": np.sqrt(np.square(np.subtract(svm_predict, labels[ACTUAL_LABEL])).sum(axis=1)),
-#     "random forest": np.sqrt(np.square(np.subtract(random_forest_predict, labels[ACTUAL_LABEL])).sum(axis=1)),
-#     "label": [ACTUAL_LABEL for i in range(NUMBER_OF_DATA)]
-# }
-
-# print("Traditional MSE: {:.3f}".format(data['traditional'].mean()))
-# print("KNN MSE: {:.3f}".format(data['knn'].mean()))
-# print("SVM MSE: {:.3f}".format(data['svm'].mean()))
-# print("Random Forest MSE: {:.3f}".format(data['random forest'].mean()))
-#
-# df = pd.DataFrame(data, columns=data.keys())
-# df.to_csv("./result/mse.csv", mode='a', index=False, header=False)
-
+# df.to_csv("./result/rmse.csv", mode='a', index=False, header=False)

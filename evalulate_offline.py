@@ -64,11 +64,51 @@ def predict_labels(rssi_vectors):
 actual = [labels[label] for label in test['label']]
 
 rf = pickle.load(open("./models/rf.pickle", "rb"))
+knn = pickle.load(open("./models/knn.pickle", "rb"))
+svm = pickle.load(open("./models/svm.pickle", "rb"))
+
 rf_predict = [labels[label] for label in rf.predict(test[columns].values)]
+knn_predict = [labels[label] for label in knn.predict(test[columns].values)]
+svm_predict = [labels[label] for label in svm.predict(test[columns].values)]
 
 traditional_predict = [labels[label] for label in predict_labels(test[columns]).values]
 
-traditional_rmse = np.sqrt(np.square(np.subtract(actual, traditional_predict)).sum(axis=1)).mean()
-rf_rmse = np.sqrt(np.square(np.subtract(actual, rf_predict)).sum(axis=1)).mean()
+traditional_rsme = np.sqrt(np.square(np.subtract(actual, traditional_predict)).sum(axis=1))
+rf_rsme = np.sqrt(np.square(np.subtract(actual, rf_predict)).sum(axis=1))
+svm_rsme = np.sqrt(np.square(np.subtract(actual, svm_predict)).sum(axis=1))
+knn_rsme = np.sqrt(np.square(np.subtract(actual, knn_predict)).sum(axis=1))
 
-print("Traditional RMSE: {:.3f}, Random Forest RMSE: {:.3f}".format(traditional_rmse, rf_rmse))
+traditional_data = {
+    "rsme": traditional_rsme,
+    "method": "traditional",
+    "label": test['label']
+}
+
+rf_data = {
+    "rsme": rf_rsme,
+    "method": "random forest",
+    "label": test['label']
+}
+
+svm_data = {
+    "rsme": svm_rsme,
+    "method": "svm",
+    "label": test['label']
+}
+
+knn_data = {
+    "rsme": knn_rsme,
+    "method": "knn",
+    "label": test['label']
+}
+
+df_traditional = pd.DataFrame(traditional_data)
+df_rf = pd.DataFrame(rf_data)
+df_svm = pd.DataFrame(svm_data)
+df_knn = pd.DataFrame(knn_data)
+
+df = pd.concat([df_traditional, df_rf, df_svm, df_knn], ignore_index=True)
+df.to_csv("./result/rsme.csv", index=False)
+
+print(df.groupby(['method']).mean())
+
