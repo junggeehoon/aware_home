@@ -4,7 +4,7 @@ colors = plt.rcParams["axes.prop_cycle"]()
 
 WINDOW_SIZE = 5
 
-df = pd.read_csv('./data/datapoints.csv')
+df = pd.read_csv('./data/sample.csv')
 columns_to_filter = ['rssi0', 'rssi1', 'rssi2', 'rssi3', 'rssi4', 'rssi5', 'rssi6', 'rssi7', 'rssi8', 'rssi9', 'rssi10',
                      'rssi11']
 

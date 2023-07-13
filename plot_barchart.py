@@ -7,7 +7,7 @@ df = pd.read_csv("./result/rsme.csv")
 
 sns.barplot(data=df, x="method", y="rsme")
 
-plt.ylabel("RMSE")
+plt.ylabel("RSME")
 plt.xlabel("Method")
 plt.tight_layout()
 plt.savefig("./figures/rmse_barchart.png")
