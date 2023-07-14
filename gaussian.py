@@ -1,33 +1,28 @@
-from sklearn.gaussian_process import GaussianProcessClassifier
-from sklearn.model_selection import train_test_split
-from sklearn.model_selection import cross_val_score
-from sklearn.gaussian_process.kernels import RBF
+from sklearn.gaussian_process import GaussianProcessRegressor
+from sklearn.gaussian_process.kernels import RBF, ConstantKernel as C
 import pandas as pd
-import pickle
+import numpy as np
 
-df = pd.read_csv('./data/sample.csv')
+# Prepare your data
+train_data = pd.read_csv("./data/sample_small.csv")  # assuming that's your DataFrame
+X_train = train_data[['rssi0', 'rssi1', 'rssi2', 'rssi3', 'rssi4', 'rssi5', 'rssi6', 'rssi7', 'rssi8', 'rssi9', 'rssi10', 'rssi11']]
+y_train_x = train_data['x']
+y_train_y = train_data['y']
 
-X = df.iloc[:, 0: -3].values
-y = df['label'].values
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
+# Define the kernel function
+kernel = C(1.0, (1e-3, 1e3)) * RBF(10, (1e-2, 1e2))
 
-kernel = 1.0 * RBF(1.0)
-GPClf = GaussianProcessClassifier(kernel=kernel,
-                                  random_state=0)
+# Create and fit the Gaussian Process model for x-coordinate
+gp_x = GaussianProcessRegressor(kernel=kernel)
+gp_x.fit(X_train, y_train_x)
 
-GPClf.fit(X_train, y_train)
+# Create and fit the Gaussian Process model for y-coordinate
+gp_y = GaussianProcessRegressor(kernel=kernel)
+gp_y.fit(X_train, y_train_y)
 
-accuracies = cross_val_score(estimator=GPClf, X=X_test, y=y_test)
-print("Average score: {:.3f}".format(accuracies.mean()))
+# Now, given new RSSI values (input_rssi), you can predict the (x, y) location.
+input_rssi = np.array([[-92, -70, -85, -93, -86, -73, -62, -79, -81, -79, -74, -82]])
+x_pred, sigma_x = gp_x.predict(input_rssi, return_std=True)
+y_pred, sigma_y = gp_y.predict(input_rssi, return_std=True)
 
-filename = "./models/gaussian.pickle"
-pickle.dump(GPClf, open(filename, "wb"))
-
-# prob = model.predict_proba([[-72,	-79,	-74,	-92,	-90,	-96,	-79,	-78,	-98,	-89,	-92,	-95]])
-# print(prob)
-
-# for i in range(3):
-#     for j in range(3):
-#         # print("Probability for ({}, {}) = ({:.3f}, {:.3f})".format(i, j, prob[0][0][i], prob[1][0][j]))
-#         print("Probability for ({}, {}) = {:.3f}".format(i, j, prob[0][0][i] * prob[1][0][j]))
-
+print(f"Predicted location is ({x_pred[0]}, {y_pred[0]}).")

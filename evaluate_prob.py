@@ -13,4 +13,4 @@ for error in errors:
     print(f"\nError: {error}")
     for method, data in grouped:
         prob = (data['rsme'] <= error).mean()
-        print(f"Method {method}: {prob}")
+        print(f"{method}: {prob:.3f}")
