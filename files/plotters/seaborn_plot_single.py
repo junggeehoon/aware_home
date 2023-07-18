@@ -6,7 +6,7 @@ import pandas as pd
 
 
 sns.set_style("whitegrid")
-df = pd.read_csv('data/single_plot.csv')
+df = pd.read_csv('../../data/single_plot.csv')
 data = df.loc[df['distance'] == 1]
 
 cut_off_data = data[(np.abs(stats.zscore(data['rssi'])) < 2)]['rssi']

@@ -4,8 +4,8 @@ import numpy as np
 import pandas as pd
 import pickle
 
-train = pd.read_csv('./train/datapoints.csv')
-test = pd.read_csv('./test/datapoints.csv')
+train = pd.read_csv('../train/datapoints.csv')
+test = pd.read_csv('../test/datapoints.csv')
 
 columns = ['rssi0', 'rssi1', 'rssi2', 'rssi3', 'rssi4', 'rssi5', 'rssi6', 'rssi7', 'rssi8', 'rssi9', 'rssi10',
            'rssi11']
@@ -26,9 +26,9 @@ def predict_labels(rssi_vectors):
 
 actual = [labels[label] for label in test['label']]
 
-rf = pickle.load(open("./models/rf.pickle", "rb"))
-knn = pickle.load(open("./models/knn.pickle", "rb"))
-svm = pickle.load(open("./models/svm.pickle", "rb"))
+rf = pickle.load(open("../models/rf.pickle", "rb"))
+knn = pickle.load(open("../models/knn.pickle", "rb"))
+svm = pickle.load(open("../models/svm.pickle", "rb"))
 
 rf_predict = [labels[label] for label in rf.predict(test[columns].values)]
 knn_predict = [labels[label] for label in knn.predict(test[columns].values)]

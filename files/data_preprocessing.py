@@ -2,7 +2,7 @@ import pandas as pd
 
 criterion = 3
 
-df = pd.read_csv('./vectors/all.csv')
+df = pd.read_csv('../vectors/all.csv')
 
 columns_to_filter = ['rssi0', 'rssi1', 'rssi2', 'rssi3', 'rssi4', 'rssi5', 'rssi6', 'rssi7', 'rssi8', 'rssi9', 'rssi10',
                      'rssi11']

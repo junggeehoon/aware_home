@@ -8,7 +8,7 @@ import seaborn as sb
 LABEL = 'L-04'
 CHANNELS = [0, 2, 3]
 
-df = pd.read_csv('./data/datapoints.csv')
+df = pd.read_csv('../../data/datapoints.csv')
 # filtered_df = pd.read_csv('./data/datapoints_mean_filtered.csv')
 
 raw_data = df.loc[df['label'] == LABEL]

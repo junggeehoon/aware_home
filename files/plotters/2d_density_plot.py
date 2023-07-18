@@ -14,7 +14,7 @@ rotated = rotate(floor_plan, -90, reshape=True)
 
 X = [-92,	-70,	-85,	-93,	-86,	-73,	-62,	-79,	-81,	-79,	-74,	-82]  # H-07
 
-rf = pickle.load(open("./models/rf.pickle", "rb"))
+rf = pickle.load(open("../../models/rf.pickle", "rb"))
 
 probs = rf.predict_proba([X])
 

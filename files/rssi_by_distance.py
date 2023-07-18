@@ -4,7 +4,7 @@ import pandas as pd
 
 
 sns.set_style("whitegrid")
-df = pd.read_csv('data/single_plot.csv')
+df = pd.read_csv('../data/single_plot.csv')
 grouped_data = df.groupby(['distance'])
 mean = grouped_data.mean()
 std = grouped_data.std()

@@ -15,13 +15,13 @@ traditional_predict = []
 
 PORT = '/dev/cu.usbserial-020F8794'
 
-df = pd.read_csv('./train/datapoints.csv')
+df = pd.read_csv('../train/datapoints.csv')
 
 mean = df.groupby(['x', 'y']).mean()
 
-rf = pickle.load(open("./models/rf.pickle", "rb"))
-knn = pickle.load(open("./models/knn.pickle", "rb"))
-svm = pickle.load(open("./models/svm.pickle", "rb"))
+rf = pickle.load(open("../models/rf.pickle", "rb"))
+knn = pickle.load(open("../models/knn.pickle", "rb"))
+svm = pickle.load(open("../models/svm.pickle", "rb"))
 
 ser = serial.Serial(PORT, 115200)
 ser.setDTR(False)

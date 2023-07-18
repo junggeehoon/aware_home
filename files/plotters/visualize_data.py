@@ -5,7 +5,7 @@ colors = plt.rcParams["axes.prop_cycle"]()
 
 LABEL = 'L-02'
 
-df = pd.read_csv('./data/sample.csv')
+df = pd.read_csv('../../data/sample.csv')
 df = df.dropna()
 
 data = df.loc[df['label'] == LABEL]
@@ -24,5 +24,5 @@ for i in range(number_of_sensor):
     plt.legend(loc="upper right")
 
 fig.tight_layout()
-plt.savefig("./figures/rssi.png")
+plt.savefig("../../figures/rssi.png")
 plt.show()

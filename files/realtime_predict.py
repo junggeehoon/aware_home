@@ -1,10 +1,10 @@
-from labels import labels
+from files.labels import labels
 import numpy as np
 import serial
 import pickle
 import time
 
-rf = pickle.load(open("./models/rf.pickle", "rb"))
+rf = pickle.load(open("../models/rf.pickle", "rb"))
 
 x = []
 PORT = '/dev/cu.usbserial-020F8794'
