@@ -7,7 +7,7 @@
     
 
 2. Navigate to aware_home/ directory
-3. Run the following command to install all requirements for this assignment:
+3. Run the following command to install all requirements for this project:
 
     `pip install -r requirements.txt`
 
