@@ -12,8 +12,8 @@
     `pip install -r requirements.txt`
 
 ## Overview
-This project is part of **The Aware Home** project during 2023 IPAT Summer Internship Program. You can see detailed documents about this project from this [Notion](https://geehoon.notion.site/Machine-Learning-Approaches-for-Indoor-Location-Fingerprinting-Using-Apple-Watch-RSSI-fc6cbe1d59e44aa1a66004446faf7bb2?pvs=4) page.
-It scans the Bluetooth signals from an Apple Watch to track its location. Random Forest, Support Vector Machine, and K-Nearest Neighbors models were used for prediction.
+This project forms a part of **The Aware Home** project, carried out during the 2023 IPAT Summer Internship Program. detailed documentation regarding this project can be found on this [Notion](https://geehoon.notion.site/Machine-Learning-Approaches-for-Indoor-Location-Fingerprinting-Using-Apple-Watch-RSSI-fc6cbe1d59e44aa1a66004446faf7bb2?pvs=4) page.
+The system scans Bluetooth signals emitted by an Apple Watch to determine its location. Various prediction models, including Random Forest, Support Vector Machine, and K-Nearest Neighbors, were utilized.
 
 ## Project Directory
 1. **files**: Contains all python files needed for this project.
