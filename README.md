@@ -12,7 +12,7 @@
     `pip install -r requirements.txt`
 
 ## Overview
-This project forms a part of [The Aware Home](https://gvu.gatech.edu/research/labs/aware-home-research-initiative) project, carried out during the [2023 IPAT Summer Internship Program](https://research.gatech.edu/research-interns-selected-summer-2023). detailed documentation regarding this project can be found on this [Notion](https://geehoon.notion.site/Machine-Learning-Approaches-for-Indoor-Location-Fingerprinting-Using-Apple-Watch-RSSI-fc6cbe1d59e44aa1a66004446faf7bb2?pvs=4) page.
+This project forms a part of [The Aware Home](https://gvu.gatech.edu/research/labs/aware-home-research-initiative) project, carried out during the [2023 IPAT Summer Internship Program](https://research.gatech.edu/research-interns-selected-summer-2023). Detailed documentation regarding this project can be found on this [Notion](https://geehoon.notion.site/Machine-Learning-Approaches-for-Indoor-Location-Fingerprinting-Using-Apple-Watch-RSSI-fc6cbe1d59e44aa1a66004446faf7bb2?pvs=4) page.
 The system scans Bluetooth signals emitted by an Apple Watch to determine its location. Various prediction models, including Random Forest, Support Vector Machine, and K-Nearest Neighbors, were utilized.
 
 ## Project Directory
