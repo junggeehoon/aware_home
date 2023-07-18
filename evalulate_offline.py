@@ -36,31 +36,31 @@ svm_predict = [labels[label] for label in svm.predict(test[columns].values)]
 
 traditional_predict = [labels[label] for label in predict_labels(test[columns]).values]
 
-traditional_rsme = np.sqrt(np.square(np.subtract(actual, traditional_predict)).sum(axis=1))
-rf_rsme = np.sqrt(np.square(np.subtract(actual, rf_predict)).sum(axis=1))
-svm_rsme = np.sqrt(np.square(np.subtract(actual, svm_predict)).sum(axis=1))
-knn_rsme = np.sqrt(np.square(np.subtract(actual, knn_predict)).sum(axis=1))
+traditional_rmse = np.sqrt(np.square(np.subtract(actual, traditional_predict)).sum(axis=1))
+rf_rmse = np.sqrt(np.square(np.subtract(actual, rf_predict)).sum(axis=1))
+svm_rmse = np.sqrt(np.square(np.subtract(actual, svm_predict)).sum(axis=1))
+knn_rmse = np.sqrt(np.square(np.subtract(actual, knn_predict)).sum(axis=1))
 
 traditional_data = {
-    "rsme": traditional_rsme,
+    "rsme": traditional_rmse,
     "method": "traditional",
     "label": test['label']
 }
 
 rf_data = {
-    "rsme": rf_rsme,
+    "rsme": rf_rmse,
     "method": "random forest",
     "label": test['label']
 }
 
 svm_data = {
-    "rsme": svm_rsme,
+    "rsme": svm_rmse,
     "method": "svm",
     "label": test['label']
 }
 
 knn_data = {
-    "rsme": knn_rsme,
+    "rsme": knn_rmse,
     "method": "knn",
     "label": test['label']
 }
@@ -71,6 +71,6 @@ df_svm = pd.DataFrame(svm_data)
 df_knn = pd.DataFrame(knn_data)
 
 df = pd.concat([df_traditional, df_rf, df_svm, df_knn], ignore_index=True)
-df.to_csv("./result/rsme.csv", index=False)
+df.to_csv("./result/rmse.csv", index=False)
 
 print(df.groupby(['method']).mean())

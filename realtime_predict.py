@@ -1,8 +1,8 @@
+from labels import labels
 import numpy as np
 import serial
 import pickle
 import time
-from labels import labels
 
 rf = pickle.load(open("./models/rf.pickle", "rb"))
 
