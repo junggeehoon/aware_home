@@ -1,12 +1,9 @@
-from matplotlib.animation import FuncAnimation
-from files.labels import labels
+from src.labels import labels
 import numpy as np
 import serial
 import pickle
 import matplotlib.pyplot as plt
-import seaborn as sns
 import matplotlib
-import pandas as pd
 
 matplotlib.use("TkAgg")
 
@@ -46,7 +43,6 @@ def convert(arr):
     return array
 
 
-sns.set_style("whitegrid")
 fig, ax = plt.subplots()
 
 # plot reference points

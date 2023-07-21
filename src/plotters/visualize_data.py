@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 colors = plt.rcParams["axes.prop_cycle"]()
 
-LABEL = 'L-02'
+LABEL = 'H-02'
 
 df = pd.read_csv('../../data/sample.csv')
 df = df.dropna()
