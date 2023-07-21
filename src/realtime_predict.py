@@ -1,12 +1,10 @@
-from files.labels import labels
+from src.labels import labels
 import numpy as np
 import serial
 import pickle
-import time
 
 rf = pickle.load(open("../models/rf.pickle", "rb"))
 
-x = []
 PORT = '/dev/cu.usbserial-020F8794'
 
 ser = serial.Serial(PORT, 115200)
@@ -41,7 +39,6 @@ def convert(arr):
     return array
 
 
-start_time = time.time()
 while True:
     string = ser.readline().decode()
     s = string.split()
