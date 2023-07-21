@@ -47,4 +47,4 @@ Measure and collect RSSI values by running `./src/bluetooth_scanner.py`. It will
 For realtime prediction, run `./src/realtime_prediction.py`. It will use previously generated files for prediction.
 
 ### Evaluation
-Run `./src/evalluate_offline.py` to calculate Root Mean Squared Error (RSME).
+Run `./src/evaluate_offline.py` to calculate Root Mean Squared Error (RSME).
