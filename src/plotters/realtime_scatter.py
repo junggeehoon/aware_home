@@ -6,8 +6,12 @@ import matplotlib.pyplot as plt
 import matplotlib
 
 matplotlib.use("TkAgg")
+x_offset = 7
+y_offset = -3
 
 rf = pickle.load(open("../../models/rf.pickle", "rb"))
+
+img = plt.imread('../../figures/test.png')
 
 PORT = '/dev/cu.usbserial-020F8794'
 
@@ -43,28 +47,32 @@ def convert(arr):
     return array
 
 
-fig, ax = plt.subplots()
+fig, ax = plt.subplots(figsize=(8, 6))
+
 
 # plot reference points
 classes = rf.classes_
 coordinates = [labels[label] for label in rf.classes_]
 x, y = zip(*coordinates)
 
-x = np.subtract(8, x)
-y = np.array(y)
+x = np.multiply(np.subtract(8, x), 10)
+y = np.multiply(np.array(y), 10)
 
-ax.scatter(x, y, color='blue')
+ax.imshow(img, extent=[min(x) - 16, max(x) + 16, min(y) - 16, max(y) + 16], zorder=0)
+ax.scatter(x + x_offset, y + y_offset, color='blue')
 
 predicted_point, = ax.plot([], [], 'ro')  # Initialize a red dot for the predicted point
 
-ax.set_xlim(min(x) - 1, max(x) + 1)
-ax.set_ylim(min(y) - 1, max(y) + 1)
+ax.set_xlim(min(x) - 20, max(x) + 20)
+ax.set_ylim(min(y) - 20, max(y) + 20)
 plt.xlabel('')
 plt.ylabel('')
 plt.xticks([])
 plt.yticks([])
 
 fig.show()
+
+last_predictions = []
 
 while True:
     string = ser.readline().decode()
@@ -74,9 +82,14 @@ while True:
         if validate(arr):
             arr = convert(arr)
             predict = rf.predict([arr])
-            print("Label: {}, Coordinate: {}".format(predict, labels[predict[0]]))
-            predicted_x = 8 - labels[predict[0]][0]
-            predicted_y = labels[predict[0]][1]
+            last_predictions.append(predict[0])
+            if len(last_predictions) > 5:
+                last_predictions.pop(0)
+            unique_labels, counts = np.unique(last_predictions, return_counts=True)
+            most_frequent = unique_labels[np.argmax(counts)]
+            print("Label: {}, Coordinate: {}".format(most_frequent, labels[most_frequent]))
+            predicted_x = np.multiply(8 - labels[most_frequent][0], 10) + x_offset
+            predicted_y = np.multiply(labels[most_frequent][1], 10) + y_offset
             predicted_point.set_data(predicted_x, predicted_y)  # Update the red dot position
             fig.canvas.draw()
         else:
