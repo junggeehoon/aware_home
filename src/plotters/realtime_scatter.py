@@ -90,7 +90,7 @@ while True:
             print("Label: {}, Coordinate: {}".format(most_frequent, labels[most_frequent]))
             predicted_x = np.multiply(8 - labels[most_frequent][0], 10) + x_offset
             predicted_y = np.multiply(labels[most_frequent][1], 10) + y_offset
-            predicted_point.set_data(predicted_x, predicted_y)  # Update the red dot position
+            predicted_point.set_data(predicted_x, predicted_y)
             fig.canvas.draw()
         else:
             print("Data is invalid", arr)
