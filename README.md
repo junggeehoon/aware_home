@@ -41,7 +41,7 @@ Measure and collect RSSI values by running `./src/bluetooth_scanner.py`. It will
 ### Training
 1. **Random Forest**: Fits random forest classifier by running `./src/models/rf.py`
 2. **K-Nearest Neighbors**: Fits K-Nearest Neighbors classifier by running `./src/models/knn.py`
-3. **Support Vector Machine**: sFits Support Vector Machine classifier by running `./src/models/svm.py`
+3. **Support Vector Machine**: Fits Support Vector Machine classifier by running `./src/models/svm.py`
 
 ### Usage
 For realtime prediction, run `./src/realtime_prediction.py`. It will use previously generated files for prediction.
