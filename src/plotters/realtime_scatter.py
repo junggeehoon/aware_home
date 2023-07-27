@@ -1,13 +1,13 @@
-from src.labels import labels
+import pickle
 import numpy as np
 import serial
-import pickle
 import matplotlib.pyplot as plt
 import matplotlib
+from src.labels import labels
 
 matplotlib.use("TkAgg")
-x_offset = 7
-y_offset = -3
+X_OFFSET = 7
+Y_OFFSET = -3
 
 rf = pickle.load(open("../../models/rf.pickle", "rb"))
 
@@ -27,9 +27,7 @@ def validate(arr):
 
 
 def parse_int(arr):
-    for i in range(len(arr)):
-        arr[i] = int(arr[i])
-    return arr
+    return [int(value) for value in arr]
 
 
 def check_numbers(arr):
@@ -59,7 +57,7 @@ x = np.multiply(np.subtract(8, x), 10)
 y = np.multiply(np.array(y), 10)
 
 ax.imshow(img, extent=[min(x) - 16, max(x) + 16, min(y) - 16, max(y) + 16], zorder=0)
-ax.scatter(x + x_offset, y + y_offset, color='blue')
+ax.scatter(x + X_OFFSET, y + Y_OFFSET, color='blue')
 
 predicted_point, = ax.plot([], [], 'ro')  # Initialize a red dot for the predicted point
 
@@ -87,9 +85,9 @@ while True:
                 last_predictions.pop(0)
             unique_labels, counts = np.unique(last_predictions, return_counts=True)
             most_frequent = unique_labels[np.argmax(counts)]
-            print("Label: {}, Coordinate: {}".format(most_frequent, labels[most_frequent]))
-            predicted_x = np.multiply(8 - labels[most_frequent][0], 10) + x_offset
-            predicted_y = np.multiply(labels[most_frequent][1], 10) + y_offset
+            print(f"Label: {most_frequent}, Coordinate: {labels[most_frequent]}")
+            predicted_x = np.multiply(8 - labels[most_frequent][0], 10) + X_OFFSET
+            predicted_y = np.multiply(labels[most_frequent][1], 10) + Y_OFFSET
             predicted_point.set_data(predicted_x, predicted_y)
             fig.canvas.draw()
         else:
